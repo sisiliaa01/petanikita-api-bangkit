@@ -1,35 +1,4 @@
-steps:
-  # Install dependencies
-  - name: 'gcr.io/cloud-builders/composer'
-    args: ['install', '--ignore-platform-reqs']
-    
-  # Run database migrations
-  - name: 'gcr.io/petanikita/petanikita:$SHORT_SHA'
-    entrypoint: 'php'
-    args:
-      - 'artisan'
-      - 'migrate'
-      - '--force'
-      - '--no-interaction'
 
-
-  # Build Docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/petanikita/petanikita:$SHORT_SHA', '.']
-# Push Docker image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/petanikita/petanikita:$SHORT_SHA']
-
-  # Deploy to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'SERVICE_NAME'
-      - '--image=gcr.io/petanikita/petanikita:$SHORT_SHA'
-      - '--platform=managed'
-      - '--region=asia-southeast2'
       
       steps:
   # Langkah-langkah build di sini
