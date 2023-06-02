@@ -30,3 +30,16 @@ steps:
       - '--image=gcr.io/petanikita/petanikita:$SHORT_SHA'
       - '--platform=managed'
       - '--region=asia-southeast2'
+      
+      steps:
+  # Langkah-langkah build di sini
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  # Atau, gunakan opsi berikut:
+  # logging: NONE
+
+substitutions:
+  _LOGS_BUCKET: gs://my-logs-bucket
+  # Ganti dengan bucket logs yang valid sesuai dengan preferensi Anda
+
